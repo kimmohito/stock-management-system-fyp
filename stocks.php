@@ -46,13 +46,7 @@
                         Prices
                     </th>
                     <th class="p-2">
-                        Stocks
-                    </th>
-                    <th class="p-2">
-                        Purchases
-                    </th>
-                    <th class="p-2">
-                        Sales
+                        Quantity
                     </th>
                     <th class="p-2">
                         Suplliers
@@ -113,8 +107,6 @@
                             echo '<td class="p-2">'.$item_name.'</td>';
                             echo '<td class="p-2">'.$item_price.'</td>';
                             echo '<td class="p-2">'.$item_stock.'</td>';
-                            echo '<td class="p-2">'.$item_purchase.'</td>';
-                            echo '<td class="p-2">'.$item_sale.'</td>';
                             echo '<td class="p-2">';
                                 foreach($item_suppliers as $supplier_id){
                                     // Get supplier name, contact
@@ -126,8 +118,17 @@
                                 }
                             echo '</td>';
                             echo '<td class="p-2">';
-                                echo '<a href="item-edit.php">Edit</a>';
-                                echo '<a href="item-remove.php" class="pl-2">Remove</a>';
+                                echo '<a href="item-edit.php?id='.$item_id.'">Edit</a>';
+
+                                $query_purchase = "SELECT * FROM purchases WHERE item_id='$item_id'";
+                                $result_purchase = mysqli_query($connect,$query_purchase);
+                                $count_purchase = mysqli_num_rows($result_purchase);
+                                if($count_purchase==0){
+                                    echo '<a href="inc/item-remove.inc.php?id='.$item_id.'" class="pl-2">Remove</a>';
+                                }
+
+
+
                             echo '</td>';
 
                         echo '</tr>';
@@ -136,7 +137,7 @@
 
                     // Add new item
                     echo '<tr>';
-                        echo '<td class="p-2" colspan=8>';
+                        echo '<td class="p-2" colspan=6>';
                             echo '<a href="item-add.php">Add new item</a>';
                         echo '</td>';
                     echo '</tr>';
@@ -153,6 +154,12 @@
 
 
         </div>
+
+        
+        <?php
+            include 'footer.php';
+        ?>
+
 
     </div>
 

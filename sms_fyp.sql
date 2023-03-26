@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2023 at 10:08 AM
+-- Generation Time: Mar 26, 2023 at 07:29 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -72,7 +72,8 @@ INSERT INTO `purchases` (`purchase_id`, `purchase_date`, `item_id`, `purchase_qu
 --
 
 CREATE TABLE `sales` (
-  `sale_id` varchar(255) NOT NULL,
+  `sale_id` int(255) NOT NULL,
+  `sale_date` datetime NOT NULL,
   `item_id` varchar(255) NOT NULL,
   `sale_quantity` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -81,8 +82,8 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`sale_id`, `item_id`, `sale_quantity`) VALUES
-('1', '641fd8470d9d9', 4);
+INSERT INTO `sales` (`sale_id`, `sale_date`, `item_id`, `sale_quantity`) VALUES
+(3, '2023-03-27 01:01:54', '641fd8470d9d9', 2);
 
 -- --------------------------------------------------------
 
@@ -101,7 +102,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`supplier_id`, `supplier_name`, `supplier_contact`) VALUES
-(1, 'kim', '123'),
+(1, 'kimmo', '123456'),
 (2, 'amy', '111');
 
 -- --------------------------------------------------------
@@ -143,7 +144,7 @@ ALTER TABLE `purchases`
 -- Indexes for table `sales`
 --
 ALTER TABLE `sales`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`sale_id`);
 
 --
 -- Indexes for table `suppliers`
@@ -165,13 +166,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
-  MODIFY `purchase_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `purchase_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `sale_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `supplier_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `supplier_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -39,6 +39,9 @@
                     <th class="p-2">
                         Item Supplied
                     </th>
+                    <th class="p-2">
+                        Option
+                    </th>
                 </tr>
 
                 <?php
@@ -62,6 +65,7 @@
                         $items = [];
                         $query_purchase = "SELECT DISTINCT item_id FROM purchases WHERE supplier_id='$supplier_id'";
                         $result_purchase = mysqli_query($connect,$query_purchase);
+                        $count_purchase = mysqli_num_rows($result_purchase);
                         while($row_purchase = mysqli_fetch_assoc($result_purchase)){
                             $items[] = $row_purchase['item_id'];
                         }
@@ -81,11 +85,25 @@
                                 }
                             echo '</td>';
 
+                            echo '<td class="p-2">';                      
+                                echo '<a href="supplier-edit.php?id='.$supplier_id.'">Edit</a>';
+                                if($count_purchase==0){
+                                    echo '<a href="inc/supplier-remove.inc.php?id='.$supplier_id.'" class="pl-2">Remove</a>';
+                                }
+                            echo '</td>';
+
+
                         echo '</tr>';
 
 
                     }
 
+                    // Add new item
+                    echo '<tr>';
+                        echo '<td class="p-2" colspan=4>';
+                            echo '<a href="supplier-add.php">Add new supplier</a>';
+                        echo '</td>';
+                    echo '</tr>';
                 ?>
 
 
@@ -96,6 +114,9 @@
 
 
         </div>
+        <?php
+            include 'footer.php';
+        ?>
 
     </div>
 
